@@ -1,5 +1,11 @@
 .contacts-container {
-  min-width: 768px;
   display: flex;
-  padding: 30px;
+  justify-content: space-between;
+}
+
+.contacts-list {
+  width: 55%;
+  margin-right: 30px;
+  margin-top: 20px;
+  list-style: none;
 }

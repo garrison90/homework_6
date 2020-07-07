@@ -8,7 +8,7 @@ import "./Contacts.css";
 function Contacts({ items, onDelete, selectContact }) {
   return (
     <div className="contacts-container">
-      <ul>
+      <ul className="contacts-list">
         {items.map((item) => (
           <ContactItem
             key={item.id}

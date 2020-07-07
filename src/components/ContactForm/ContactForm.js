@@ -32,7 +32,7 @@ function ContactForm({
   function isValueValid(name, value) {
     switch (name) {
       case "name":
-      //return !!value;
+        return !!value;
       case "surname":
         return !!value;
       case "phone":
@@ -70,7 +70,7 @@ function ContactForm({
         value={item.phone}
         onChange={(e) => handleChange(e)}
       />
-      <div>
+      <div className="button-container">
         <input
           type="button"
           onClick={() => onSave(item)}

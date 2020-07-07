@@ -1,13 +1,47 @@
 .box {
-  height: 350px;
-  width: 400px;
-  background-color: tomato;
+  margin-top: 20px;
+  background: green;
+  width: 40%;
+  border: 1px solid grey;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  height: 300px;
 }
 
-input[type="text"] .error {
-  border-color: red;
+.box h1 {
+  color: white;
+  text-align: center;
+  font-size: 1.3em;
+  background-color: firebrick;
+  margin-top: 0;
+  height: 2em;
+}
+
+input[type="text"] {
+  width: 60%;
+  margin: 0.8em auto;
+  height: 2em;
+  border: none;
+  border-bottom: 1px;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  width: 60%;
+  margin: 0.8em auto;
+}
+
+input[type="button"] {
+  width: 45%;
+  margin: 0 auto;
+  height: 3em;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.error {
+  border: 10px solid red;
 }

@@ -1,17 +1,27 @@
-.item-container {
-  display: flex;
-  align-items: center;
-  padding: 10px 15px;
-  color: #333;
-  text-decoration: none;
-  border-bottom: 1px solid #eee;
-}
-
 .list-item {
-  list-style: none;
-  height: 30px;
+  display: flex;
+  justify-content: space-evenly;
+  height: 2em;
+  align-items: center;
 }
 
-span {
-  flex: 1;
+.item-name {
+  color: green;
+  width: 150px;
+}
+
+.item-surname {
+  color: yellow;
+  width: 200px;
+}
+
+.item-phone {
+  color: blue;
+  width: 200px;
+}
+
+button {
+  background-color: violet;
+  width: 50px;
+  border-radius: 5px;
 }
