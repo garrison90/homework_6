@@ -1,0 +1,13 @@
+.box {
+  height: 350px;
+  width: 400px;
+  background-color: tomato;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+input[type="text"] .error {
+  border-color: red;
+}

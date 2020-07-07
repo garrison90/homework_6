@@ -1,9 +1,7 @@
-import api from "../api";
+import api from "../../api";
 
 export const SET_ITEMS = "SET_ITEMS";
 export function setItems(data) {
-  console.log(data);
-
   return {
     type: SET_ITEMS,
     payload: data,
@@ -54,10 +52,13 @@ export function selectContact(id) {
 }
 
 export const CHANGE_CONTACT_FORM = "CHANGE_CONTACT_FORM";
-export function onChange(changes) {
+export function onChange(changes, valid) {
+  // console.log("change contact form", changes, valid);
+
   return {
     type: CHANGE_CONTACT_FORM,
     payload: changes,
+    valid: valid,
   };
 }
 

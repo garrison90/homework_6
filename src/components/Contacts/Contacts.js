@@ -1,12 +1,13 @@
 import React from "react";
 import ContactItem from "../ContactItem/ContactItem";
 import { connect } from "react-redux";
-import { onDelete, selectContact } from "../../store/actions";
+import { onDelete, selectContact } from "../../store/actions/contactsActions";
 import ContactForm from "../ContactForm/ContactForm";
+import "./Contacts.css";
 
 function Contacts({ items, onDelete, selectContact }) {
   return (
-    <div>
+    <div className="contacts-container">
       <ul>
         {items.map((item) => (
           <ContactItem

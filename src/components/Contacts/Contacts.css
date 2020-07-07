@@ -1,0 +1,5 @@
+.contacts-container {
+  min-width: 768px;
+  display: flex;
+  padding: 30px;
+}

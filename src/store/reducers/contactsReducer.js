@@ -6,7 +6,7 @@ import {
   CHANGE_CONTACT_FORM,
   UPDATE_CONTACT,
   CLEAR_FIELDS,
-} from "./actions";
+} from "../actions/contactsActions";
 
 const initialState = {
   items: [],
@@ -15,6 +15,12 @@ const initialState = {
     surname: "",
     phone: "",
   },
+  isValid: {
+    name: true,
+    surname: true,
+    phone: true,
+  },
+  isFormValid: true,
 };
 
 function setEmptyNewItem() {
@@ -33,8 +39,8 @@ function updateContact(items, contact) {
   return items.map((item) => (item.id === contact.id ? contact : item));
 }
 
-export default function (state = initialState, { type, payload }) {
-  console.log("payload", payload);
+export default function (state = initialState, { type, payload, valid }) {
+  console.log("reducer", payload, valid);
 
   switch (type) {
     case SET_ITEMS:
@@ -68,6 +74,11 @@ export default function (state = initialState, { type, payload }) {
           ...state.newItem,
           ...payload,
         },
+        isValid: {
+          ...state.isValid,
+          ...valid,
+        },
+        isFormValid: !Object.keys(valid).find((key) => !valid[key]),
       };
     case UPDATE_CONTACT:
       return {
@@ -79,6 +90,12 @@ export default function (state = initialState, { type, payload }) {
       return {
         ...state,
         newItem: setEmptyNewItem(),
+        isValid: {
+          name: true,
+          surname: true,
+          phone: true,
+        },
+        isFormValid: true,
       };
     default:
       return state;
