@@ -21,4 +21,11 @@ nav {
 
 .router-link {
   color: white;
+  text-decoration: none;
+  font-size: 2em;
+}
+
+.page {
+  text-align: center;
+  font-size: 5em;
 }

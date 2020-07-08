@@ -3,25 +3,33 @@
   justify-content: space-evenly;
   height: 2em;
   align-items: center;
+  border-bottom: 1px solid gold;
 }
 
 .item-name {
-  color: green;
   width: 150px;
 }
 
 .item-surname {
-  color: yellow;
   width: 200px;
 }
 
 .item-phone {
-  color: blue;
   width: 200px;
 }
 
-button {
-  background-color: violet;
+.item-button {
   width: 50px;
   border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  border: 1.5px solid white;
+}
+
+.delete {
+  background-color: rgb(243, 9, 9);
+}
+
+.edit {
+  background-color: seagreen;
 }

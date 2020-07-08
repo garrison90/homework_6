@@ -43,22 +43,19 @@ export function onSave(contact) {
   };
 }
 
-export const SELECT_CONTACT = "SELECT_CONTACT";
+export const SELECTED_CONTACT = "SELECTED_CONTACT";
 export function selectContact(id) {
   return {
-    type: SELECT_CONTACT,
+    type: SELECTED_CONTACT,
     payload: id,
   };
 }
 
 export const CHANGE_CONTACT_FORM = "CHANGE_CONTACT_FORM";
-export function onChange(changes, valid) {
-  // console.log("change contact form", changes, valid);
-
+export function onChange(changes) {
   return {
     type: CHANGE_CONTACT_FORM,
     payload: changes,
-    valid: valid,
   };
 }
 
@@ -66,5 +63,13 @@ export const CLEAR_FIELDS = "CLEAR_FIELDS";
 export function clearFields() {
   return {
     type: CLEAR_FIELDS,
+  };
+}
+
+export const CHECK_INPUT = "CHECK_INPUT";
+export function checkInputValid(valid) {
+  return {
+    type: CHECK_INPUT,
+    payload: valid,
   };
 }

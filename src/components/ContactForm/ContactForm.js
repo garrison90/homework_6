@@ -4,6 +4,7 @@ import {
   onChange,
   onSave,
   clearFields,
+  checkInputValid,
 } from "../../store/actions/contactsActions";
 import "./ContactForm.css";
 
@@ -12,8 +13,9 @@ function ContactForm({
   onChange,
   onSave,
   clearFields,
-  isFormValid,
+  disabledButton,
   isValid,
+  checkInputValid,
 }) {
   function handleChange(e) {
     const { name, value } = e.target;
@@ -22,11 +24,18 @@ function ContactForm({
       [name]: value,
     };
 
+    onChange(changes);
+
+    validateInput(name, value);
+  }
+
+  function validateInput(name, value) {
     const valid = {
       ...isValid,
       [name]: isValueValid(name, value),
     };
-    onChange(changes, valid);
+
+    checkInputValid(valid);
   }
 
   function isValueValid(name, value) {
@@ -36,10 +45,7 @@ function ContactForm({
       case "surname":
         return !!value;
       case "phone":
-        return (
-          !!value &&
-          value.match(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g)
-        );
+        return !!value;
     }
   }
 
@@ -71,13 +77,19 @@ function ContactForm({
         onChange={(e) => handleChange(e)}
       />
       <div className="button-container">
-        <input
-          type="button"
+        <button
           onClick={() => onSave(item)}
-          disabled={!isFormValid}
-          value={item.id ? "Save" : "Add New Contact"}
-        />
-        <input type="button" onClick={() => clearFields()} value="Cancel" />
+          disabled={!disabledButton}
+          className="form-button btn-save"
+        >
+          {item.id ? "Save" : "Add New Contact"}
+        </button>
+        <button
+          className="form-button btn-cancel"
+          onClick={() => clearFields()}
+        >
+          Cancel
+        </button>
       </div>
     </div>
   );
@@ -86,7 +98,7 @@ function ContactForm({
 const mapStateToProps = (state) => {
   return {
     item: state.newItem,
-    isFormValid: state.isFormValid,
+    disabledButton: state.disabledButton,
     isValid: state.isValid,
   };
 };
@@ -95,6 +107,7 @@ const mapDispatchToProps = {
   onChange,
   onSave,
   clearFields,
+  checkInputValid,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

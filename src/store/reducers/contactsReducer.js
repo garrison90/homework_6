@@ -2,10 +2,11 @@ import {
   SET_ITEMS,
   DELETE_ITEM,
   ADD_CONTACT,
-  SELECT_CONTACT,
+  SELECTED_CONTACT,
   CHANGE_CONTACT_FORM,
   UPDATE_CONTACT,
   CLEAR_FIELDS,
+  CHECK_INPUT,
 } from "../actions/contactsActions";
 
 const initialState = {
@@ -20,8 +21,16 @@ const initialState = {
     surname: true,
     phone: true,
   },
-  isFormValid: true,
+  disabledButton: false,
 };
+
+function setIsValid() {
+  return {
+    name: true,
+    surname: true,
+    phone: true,
+  };
+}
 
 function setEmptyNewItem() {
   return {
@@ -40,8 +49,6 @@ function updateContact(items, contact) {
 }
 
 export default function (state = initialState, { type, payload, valid }) {
-  console.log("reducer", payload, valid);
-
   switch (type) {
     case SET_ITEMS:
       return {
@@ -58,14 +65,16 @@ export default function (state = initialState, { type, payload, valid }) {
         ...state,
         items: createContact(state.items, payload),
         newItem: setEmptyNewItem(),
+        disabledButton: false,
       };
-    case SELECT_CONTACT:
+    case SELECTED_CONTACT:
       return {
         ...state,
         newItem: {
           ...state.newItem,
           ...state.items.find((item) => item.id === payload),
         },
+        disabledButton: true,
       };
     case CHANGE_CONTACT_FORM:
       return {
@@ -74,29 +83,30 @@ export default function (state = initialState, { type, payload, valid }) {
           ...state.newItem,
           ...payload,
         },
-        isValid: {
-          ...state.isValid,
-          ...valid,
-        },
-        isFormValid: !Object.keys(valid).find((key) => !valid[key]),
       };
     case UPDATE_CONTACT:
       return {
         ...state,
         items: updateContact(state.items, payload),
         newItem: setEmptyNewItem(),
+        disabledButton: false,
       };
     case CLEAR_FIELDS:
       return {
         ...state,
         newItem: setEmptyNewItem(),
-        isValid: {
-          name: true,
-          surname: true,
-          phone: true,
-        },
-        isFormValid: true,
+        isValid: setIsValid(),
+        disabledButton: false,
       };
+    case CHECK_INPUT:
+      return {
+        ...state,
+        isValid: { ...payload },
+        disabledButton: !Object.keys(state.newItem).find(
+          (key) => !state.newItem[key]
+        ),
+      };
+
     default:
       return state;
   }
