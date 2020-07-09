@@ -30,3 +30,7 @@ nav {
   text-align: center;
   font-size: 5em;
 }
+
+.router-link:hover {
+  text-decoration: underline;
+}

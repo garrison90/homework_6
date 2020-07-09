@@ -17,18 +17,18 @@ const initialState = {
     phone: "",
   },
   isValid: {
-    name: true,
-    surname: true,
-    phone: true,
+    name: null,
+    surname: null,
+    phone: null,
   },
-  disabledButton: false,
+  disabledButton: true,
 };
 
 function setIsValid() {
   return {
-    name: true,
-    surname: true,
-    phone: true,
+    name: null,
+    surname: null,
+    phone: null,
   };
 }
 
@@ -48,6 +48,10 @@ function updateContact(items, contact) {
   return items.map((item) => (item.id === contact.id ? contact : item));
 }
 
+function isButtonDisabled(obj) {
+  return !Object.values(obj).every((item) => item === false || item === "");
+}
+
 export default function (state = initialState, { type, payload }) {
   switch (type) {
     case SET_ITEMS:
@@ -65,7 +69,8 @@ export default function (state = initialState, { type, payload }) {
         ...state,
         items: createContact(state.items, payload),
         newItem: setEmptyNewItem(),
-        disabledButton: false,
+        isValid: setIsValid(),
+        disabledButton: isButtonDisabled(payload),
       };
     case SELECTED_CONTACT:
       return {
@@ -74,7 +79,8 @@ export default function (state = initialState, { type, payload }) {
           ...state.newItem,
           ...state.items.find((item) => item.id === payload),
         },
-        disabledButton: true,
+        isValid: { ...!state.isValid },
+        disabledButton: false,
       };
     case CHANGE_CONTACT_FORM:
       return {
@@ -89,24 +95,22 @@ export default function (state = initialState, { type, payload }) {
         ...state,
         items: updateContact(state.items, payload),
         newItem: setEmptyNewItem(),
-        disabledButton: false,
+        isValid: setIsValid(),
+        disabledButton: true,
       };
     case CLEAR_FIELDS:
       return {
         ...state,
         newItem: setEmptyNewItem(),
         isValid: setIsValid(),
-        disabledButton: false,
+        disabledButton: true,
       };
     case CHECK_INPUT:
       return {
         ...state,
         isValid: { ...payload },
-        disabledButton: !Object.keys(state.newItem).find(
-          (key) => !state.newItem[key]
-        ),
+        disabledButton: isButtonDisabled(payload),
       };
-
     default:
       return state;
   }

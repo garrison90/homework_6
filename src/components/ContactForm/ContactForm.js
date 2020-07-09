@@ -41,11 +41,14 @@ function ContactForm({
   function isValueValid(name, value) {
     switch (name) {
       case "name":
-        return !!value;
+        return !value.match(/^[a-z0-9_-]{1,25}$/gi);
       case "surname":
-        return !!value;
+        return !value.match(/^[a-z0-9_-]{1,25}$/gi);
       case "phone":
-        return !!value;
+        return !value.match(
+          /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/
+        );
+      ///^\d{1,}$/;
     }
   }
 
@@ -53,7 +56,7 @@ function ContactForm({
     <div className="box">
       <h1>Contact Form</h1>
       <input
-        className={isValid.name ? "" : "error"}
+        className={isValid.name ? "error" : ""}
         type="text"
         name="name"
         placeholder="Name"
@@ -61,7 +64,7 @@ function ContactForm({
         onChange={(e) => handleChange(e)}
       />
       <input
-        className={isValid.surname ? "" : "error"}
+        className={isValid.surname ? "error" : ""}
         type="text"
         name="surname"
         placeholder="Surname"
@@ -69,7 +72,7 @@ function ContactForm({
         onChange={(e) => handleChange(e)}
       />
       <input
-        className={isValid.phone ? "" : "error"}
+        className={isValid.phone ? "error" : ""}
         type="text"
         name="phone"
         placeholder="Phone"
@@ -79,7 +82,7 @@ function ContactForm({
       <div className="button-container">
         <button
           onClick={() => onSave(item)}
-          disabled={!disabledButton}
+          disabled={disabledButton}
           className="form-button btn-save"
         >
           {item.id ? "Save" : "Add New Contact"}
