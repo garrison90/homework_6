@@ -48,7 +48,7 @@ function updateContact(items, contact) {
   return items.map((item) => (item.id === contact.id ? contact : item));
 }
 
-export default function (state = initialState, { type, payload, valid }) {
+export default function (state = initialState, { type, payload }) {
   switch (type) {
     case SET_ITEMS:
       return {
