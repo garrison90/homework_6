@@ -5,7 +5,8 @@ import {
   SELECTED_CONTACT,
   CHANGE_CONTACT_FORM,
   UPDATE_CONTACT,
-  CLEAR_FIELDS,
+  CLOSE_FORM,
+  OPEN_FORM,
   CHECK_INPUT,
 } from "../actions/contactsActions";
 
@@ -16,6 +17,7 @@ const initialState = {
     surname: "",
     phone: "",
   },
+  showForm: false,
   isValid: {
     name: null,
     surname: null,
@@ -48,7 +50,7 @@ function updateContact(items, contact) {
   return items.map((item) => (item.id === contact.id ? contact : item));
 }
 
-function isButtonDisabled(obj) {
+export function isButtonDisabled(obj) {
   return !Object.values(obj).every((item) => item === false);
 }
 
@@ -71,6 +73,7 @@ export default function (state = initialState, { type, payload }) {
         newItem: setEmptyNewItem(),
         isValid: setIsValid(),
         disabledButton: isButtonDisabled(payload),
+        showForm: false,
       };
     case SELECTED_CONTACT:
       return {
@@ -81,6 +84,7 @@ export default function (state = initialState, { type, payload }) {
         },
         isValid: { ...!state.isValid },
         disabledButton: false,
+        showForm: true,
       };
     case CHANGE_CONTACT_FORM:
       return {
@@ -97,12 +101,19 @@ export default function (state = initialState, { type, payload }) {
         newItem: setEmptyNewItem(),
         isValid: setIsValid(),
         disabledButton: true,
+        showForm: false,
       };
-    case CLEAR_FIELDS:
+    case CLOSE_FORM:
       return {
         ...state,
-        newItem: setEmptyNewItem(),
+        showForm: false,
+      };
+    case OPEN_FORM:
+      return {
+        ...state,
+        showForm: true,
         isValid: setIsValid(),
+        newItem: setEmptyNewItem(),
         disabledButton: true,
       };
     case CHECK_INPUT:

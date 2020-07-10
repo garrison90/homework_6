@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {
   onChange,
   onSave,
-  clearFields,
+  closeForm,
   checkInputValid,
 } from "../../store/actions/contactsActions";
 import "./ContactForm.css";
@@ -12,7 +12,7 @@ function ContactForm({
   item,
   onChange,
   onSave,
-  clearFields,
+  closeForm,
   disabledButton,
   isValid,
   checkInputValid,
@@ -86,10 +86,7 @@ function ContactForm({
         >
           {item.id ? "Save" : "Add New Contact"}
         </button>
-        <button
-          className="form-button btn-cancel"
-          onClick={() => clearFields()}
-        >
+        <button className="form-button btn-cancel" onClick={() => closeForm()}>
           Cancel
         </button>
       </div>
@@ -97,18 +94,18 @@ function ContactForm({
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ newItem, disabledButton, isValid }) => {
   return {
-    item: state.newItem,
-    disabledButton: state.disabledButton,
-    isValid: state.isValid,
+    item: newItem,
+    disabledButton,
+    isValid,
   };
 };
 
 const mapDispatchToProps = {
   onChange,
   onSave,
-  clearFields,
+  closeForm,
   checkInputValid,
 };
 

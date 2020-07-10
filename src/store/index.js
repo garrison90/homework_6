@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
-import contactsReducer from "./reducers/contactsReducer";
+import reducer from "./reducers/contacts";
 
-export default createStore(contactsReducer, applyMiddleware(thunk, logger));
+export default createStore(reducer, applyMiddleware(thunk, logger));

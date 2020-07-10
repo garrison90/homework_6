@@ -59,10 +59,17 @@ export function onChange(changes) {
   };
 }
 
-export const CLEAR_FIELDS = "CLEAR_FIELDS";
-export function clearFields() {
+export const CLOSE_FORM = "CLOSE_FORM";
+export function closeForm() {
   return {
-    type: CLEAR_FIELDS,
+    type: CLOSE_FORM,
+  };
+}
+
+export const OPEN_FORM = "OPEN_FORM";
+export function openForm() {
+  return {
+    type: OPEN_FORM,
   };
 }
 
