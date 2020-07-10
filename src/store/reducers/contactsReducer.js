@@ -49,7 +49,7 @@ function updateContact(items, contact) {
 }
 
 function isButtonDisabled(obj) {
-  return !Object.values(obj).every((item) => item === false || item === "");
+  return !Object.values(obj).every((item) => item === false);
 }
 
 export default function (state = initialState, { type, payload }) {
